@@ -13,3 +13,8 @@ users:
     email: "ganesh.kodmur@bizcloudexperts.com"
     groups: ["developers", "ec2-manage"]
     access_key_required: true
+    
+  - name: "test.user"
+    email: "test.user@bizcloudexperts.com"
+    groups: ["developers"]
+    access_key_required: false
