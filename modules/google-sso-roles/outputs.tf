@@ -15,7 +15,7 @@ output "role_names" {
 output "switch_role_urls" {
   description = "URLs for switching to roles in AWS console"
   value = {
-    for k, v in aws_iam_role.google_sso_roles : k => 
+    for k, v in aws_iam_role.google_sso_roles : k =>
     "https://signin.aws.amazon.com/switchrole?account=${split("-", k)[2]}&roleName=${v.name}&displayName=${k}"
   }
 }

@@ -14,7 +14,7 @@ users:
     groups: ["developers", "ec2-manage"]
     access_key_required: true
     
-  - name: "test.user"
-    email: "test.user@bizcloudexperts.com"
-    groups: ["developers", "s3-read"]
+  - name: "test.user1"
+    email: "test.user1@bizcloudexperts.com"
+    groups: []
     access_key_required: false
