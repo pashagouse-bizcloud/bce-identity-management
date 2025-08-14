@@ -16,5 +16,5 @@ users:
     
   - name: "test.user"
     email: "test.user@bizcloudexperts.com"
-    groups: ["developers"]
+    groups: ["developers", "s3-read"]
     access_key_required: false
