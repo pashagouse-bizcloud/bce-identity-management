@@ -1,0 +1,18 @@
+roles:
+  - name: "DeveloperRole"
+    description: "Standard developer access"
+    assume_role_policy: "ec2"
+    managed_policies:
+      - "arn:aws:iam::aws:policy/PowerUserAccess"
+    
+  - name: "AdminRole"
+    description: "Administrative access"
+    assume_role_policy: "ec2"
+    managed_policies:
+      - "arn:aws:iam::aws:policy/AdministratorAccess"
+      
+  - name: "ReadOnlyRole"
+    description: "Read-only access across services"
+    assume_role_policy: "ec2"
+    managed_policies:
+      - "arn:aws:iam::aws:policy/ReadOnlyAccess"

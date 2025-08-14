@@ -1,0 +1,15 @@
+users:
+  - name: "john.doe"
+    email: "john.doe@bce.com"
+    groups: ["developers", "s3-read"]
+    access_key_required: true
+    
+  - name: "jane.smith"
+    email: "jane.smith@bce.com"
+    groups: ["admins", "billing"]
+    access_key_required: false
+    
+  - name: "mike.wilson"
+    email: "mike.wilson@bce.com"
+    groups: ["developers", "ec2-manage"]
+    access_key_required: true
