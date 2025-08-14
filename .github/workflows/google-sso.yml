@@ -1,0 +1,71 @@
+name: 'Google SSO Deployment'
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'deployments/google-sso/**'
+      - 'modules/google-sso-roles/**'
+      - 'config/google-sso-roles.yaml'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'deployments/google-sso/**'
+      - 'modules/google-sso-roles/**'
+      - 'config/google-sso-roles.yaml'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  terraform:
+    name: 'Google SSO Terraform'
+    runs-on: ubuntu-latest
+    environment: dev
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./deployments/google-sso
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_GOOGLE_SSO }}
+        aws-region: us-east-1
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.5.0"
+
+    - name: Terraform Format
+      id: fmt
+      run: terraform fmt -check -recursive
+
+    - name: Terraform Init
+      id: init
+      run: terraform init
+
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+
+    - name: Terraform Plan
+      id: plan
+      if: github.event_name == 'pull_request'
+      run: terraform plan -no-color -input=false
+      continue-on-error: true
+
+    - name: Terraform Plan Status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false
