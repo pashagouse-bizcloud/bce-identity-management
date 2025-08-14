@@ -3,7 +3,7 @@ variable "users" {
   type = list(object({
     name                = string
     email               = string
-    groups              = list(string)
+    groups              = optional(list(string), [])
     access_key_required = bool
   }))
 }

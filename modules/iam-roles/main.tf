@@ -20,7 +20,7 @@ resource "aws_iam_role" "roles" {
   
   tags = {
     ManagedBy   = "terraform"
-    Environment = "production"
+    Environment = "dev"
   }
 }
 

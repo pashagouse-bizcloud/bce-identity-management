@@ -1,0 +1,35 @@
+# Google SSO Role Mappings for AWS Account Access
+# This defines which Google users can assume which AWS roles
+
+accounts:
+  - account_id: "123456789012"
+    account_name: "ams-ai-dev"
+    roles:
+      - role_name: "power-user-role"
+        description: "PowerUser access for developers"
+        google_users:
+          - "pasha.gouse@bizcloudexperts.com"
+          - "ganesh.kodmur@bizcloudexperts.com"
+        google_groups:
+          - "developers@bizcloudexperts.com"
+        
+      - role_name: "admin-role"
+        description: "Administrative access"
+        google_users:
+          - "ashutosh@bizcloudexperts.com"
+        google_groups: []
+          
+      - role_name: "read-only-role"
+        description: "Read-only access"
+        google_users: []
+        google_groups:
+          - "viewers@bizcloudexperts.com"
+
+  - account_id: "987654321098"
+    account_name: "ams-ai-prod"
+    roles:
+      - role_name: "power-user-role"
+        description: "PowerUser access for production"
+        google_users:
+          - "pasha.gouse@bizcloudexperts.com"  # Only senior devs in prod
+        google_groups: []
